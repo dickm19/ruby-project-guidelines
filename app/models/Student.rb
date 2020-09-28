@@ -1,4 +1,4 @@
-class Student << ActiveRecord::Base
+class Student < ActiveRecord::Base
     has_many :professor, through :courses
     has_many :spells
     belongs_to :school

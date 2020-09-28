@@ -61,9 +61,6 @@ NEXT STEPS:
         - returns the school that that house belongs to -->
     - House#Points (later)
         - returns the total points for that house instance
-    - House#sort_student(student)
-        - takes in a student instance and adds that student to a ramdom house
-        - student.house = self.all.sample
 
     SCHOOL METHODS
     <!-- - School#Houses
@@ -74,6 +71,8 @@ NEXT STEPS:
         - returns an array of all professors that work at the school
     - School#Courses
         - returns an array of all courses offered at the school -->
+    <!-- - School#sort_student(student)
+        - takes in a student instance and adds that student to a ramdom house -->
 
     STUDENT METHODS
     <!-- - Student#House

@@ -1,4 +1,5 @@
-class House << ActiveRecord::Base
+class House < ActiveRecord::Base
     has_many :students
 
+    
 end
