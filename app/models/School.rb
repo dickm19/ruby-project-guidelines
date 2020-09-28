@@ -6,6 +6,7 @@ class School < ActiveRecord::Base
 
     def sort_student(student)
         student.house = House.all.sample
+        p student.house
     end
 
 end

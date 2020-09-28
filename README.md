@@ -6,6 +6,7 @@ CLASSES
 - Course
 - Student
 - House
+- Spell
 
 RELATIONSHIPS
 School:
@@ -42,16 +43,19 @@ NEXT STEPS:
 
 
     TABLES
-    - House Table
-        - :name
+    <!-- - House Table
+        - :name -->
 
-    - Student Table
+    <!-- - Student Table
         - :name
-        - :house
+        - :house -->
         - :year (maybe later)
 
     - Courses Table
         - :professor
+
+    - Professors Table
+        :name
     
 
     HOUSE METHODS
