@@ -56,6 +56,10 @@ NEXT STEPS:
 
     - Professors Table
         :name
+
+    - Spells Table
+        :name
+        :description
     
 
     HOUSE METHODS
@@ -85,6 +89,13 @@ NEXT STEPS:
         - returns the school that the student belongs to
     - Student#Courses
         - returns an array of all courses that the student attends -->
+    - Student#add_course
+        - adds a course to the list of student courses
+    - Student#master_spell(spell)
+        - takes in a spell and adds a spell to the list of mastered spells
+    - Student#mastered_spells
+        - returns a list of spells that the student has mastered
+    - 
 
     - Student#year (maybe later)
      - Student#pet (maybe later)
