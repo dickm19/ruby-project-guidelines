@@ -5,8 +5,7 @@ class School < ActiveRecord::Base
     has_many :courses
 
     def sort_student(student)
-        student.house = House.all.sample
-        p student.house
+        student.house = houses.sample
     end
 
 end

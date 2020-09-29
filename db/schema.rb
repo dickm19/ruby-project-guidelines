@@ -10,30 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_28_202338) do
+ActiveRecord::Schema.define(version: 2020_09_29_174221) do
 
   create_table "courses", force: :cascade do |t|
     t.string "name"
     t.string "professor"
+    t.integer "school_id"
   end
 
   create_table "houses", force: :cascade do |t|
     t.string "name"
+    t.integer "school_id"
   end
 
   create_table "professors", force: :cascade do |t|
     t.string "name"
-    t.string "course"
+    t.string "course_id"
+    t.integer "school_id"
+  end
+
+  create_table "schools", force: :cascade do |t|
+    t.string "name"
   end
 
   create_table "spells", force: :cascade do |t|
     t.string "name"
     t.string "description"
+    t.integer "school_id"
   end
 
   create_table "students", force: :cascade do |t|
     t.string "name"
-    t.string "house"
+    t.integer "house_id"
+    t.integer "school_id"
   end
 
 end
