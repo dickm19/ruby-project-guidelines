@@ -43,7 +43,7 @@ NEXT STEPS:
 
 
     TABLES
-    <!-- - House Table
+    <!-- <!-- - House Table
         - :name -->
 
     <!-- - Student Table
@@ -59,7 +59,7 @@ NEXT STEPS:
 
     - Spells Table
         :name
-        :description
+        :description -->
     
 
     HOUSE METHODS

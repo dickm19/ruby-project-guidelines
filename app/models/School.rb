@@ -4,8 +4,14 @@ class School < ActiveRecord::Base
     has_many :professors
     has_many :courses
 
-    def sort_student(student)
-        student.house = houses.sample
+    def award_points(student, house, points)
+        if house.points == nil && student.house == house
+            house.points = points
+            student.house.points = points
+        else
+            student.house.points += points
+            house.points += points
+        end
     end
 
 end
