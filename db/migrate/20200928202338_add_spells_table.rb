@@ -3,7 +3,8 @@ class AddSpellsTable < ActiveRecord::Migration[6.0]
     create_table :spells do |t|
       t.string :name
       t.string :description
-      t.integer :school_id
+      t.integer :course_id
+      t.string :status
     end
   end
 end

@@ -2,16 +2,58 @@ class Student < ActiveRecord::Base
     has_many :student_courses
     has_many :courses, through: :student_courses
     has_many :professors, through: :courses
-    has_many :spells
+    has_many :spells, through: :courses
     belongs_to :school
     belongs_to :house
     # - Student#add_course
     # - adds a course to the list of student courses
     def add_course(course)
         studentcourse = StudentCourse.create(student: self, course: course)
-        
     end
     
+    ## student#practice_spell(spell) takes in a spell and changes its status to mastered, 
+    ## returns "you have mastered spell_name!", and awards the student's house 50 points
+    def practice_spell(new_spell)
+        self.spells.each do |spell|
+            if new_spell == spell
+                if spell.status == "mastered"
+                    puts "You've already mastered this spell!"
+                else
+                    spell.status = "mastered"
+                    puts "Congratulations, you have mastered #{spell.name}!"
+                    $stdout.flush
+                    sleep(1)
+                    puts " "
+
+                    puts "Fifty points to #{self.house.name}!"
+                    self.school.award_points(self, self.house, 50)
+                    $stdout.flush
+                    sleep(1)
+                    puts " "
+                    puts "#{self.house.name} now has #{self.house.points} points!"
+                end
+            end
+        end
+    end
+
+    def mastered_spells
+        mastered_spells = self.spells.select {|spell| spell.status == "mastered"}
+        spell_names = mastered_spells.map {|spell| puts spell.name}
+        spell_names
+    end
+
+    def view_courses
+        self.courses.map do |course|
+            puts course.name
+        end
+    end
+    
+    def view_professors
+        self.professors.map {|professor| puts "#{professor.name}, #{professor.course.name}" }
+    end
+
+    
+
 
     
 end

@@ -36,7 +36,8 @@ ActiveRecord::Schema.define(version: 2020_09_30_203202) do
   create_table "spells", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.integer "school_id"
+    t.integer "course_id"
+    t.string "status"
   end
 
   create_table "student_courses", force: :cascade do |t|
