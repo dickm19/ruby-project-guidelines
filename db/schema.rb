@@ -14,7 +14,6 @@ ActiveRecord::Schema.define(version: 2020_09_30_203202) do
 
   create_table "courses", force: :cascade do |t|
     t.string "name"
-    t.integer "professor_id"
     t.integer "school_id"
   end
 

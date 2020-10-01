@@ -52,22 +52,25 @@ lupin.course
 
 cli = CLI.new
 
-#cli.welcome
+# cli.welcome
 puts "Please enter your name"
 student = cli.get_student_name(hogwarts)
 $stdout.flush
 sleep(1)
-puts " "
-#cli.sorting_hat(student)
-#$stdout.flush
-#sleep(1)
-#puts " "
+# puts " "
+# cli.sorting_hat(student)
+# $stdout.flush
+# sleep(1)
+# puts " "
 courses = hogwarts.courses.map {|course| course.name}
 # binding.pry
 
 cli.select_courses(student,courses)
 
+# cli.view_courses(student)
+
+# cli.view_professors(student)
+
 binding.pry
 
-
-# student.add_course(student.name, selection)
+puts "Now that you've been sorted into your house and have chosen your courses and"
