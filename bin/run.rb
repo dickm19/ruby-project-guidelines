@@ -38,15 +38,15 @@ herbology = Course.create(name: "Herbology", school: hogwarts, professor: nevill
 
 # binding.pry
 
-minerva.course
+# minerva.course
 
-trelawny.course
+# trelawny.course
 
-neville.course
+# neville.course
 
-neville.course
+# neville.course
 
-lupin.course
+# lupin.course
 
 #CLI
 
@@ -73,4 +73,5 @@ cli.select_courses(student,courses)
 
 binding.pry
 
-puts "Now that you've been sorted into your house and have chosen your courses and"
+puts "Now that you've been sorted into your house and have chosen your courses, you are ready to begin studying at Hogwarts"
+
