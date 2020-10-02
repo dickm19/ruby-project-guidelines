@@ -28,6 +28,16 @@ class Student < ActiveRecord::Base
                     puts "You've already mastered #{new_spell.name}."
                     $stdout.flush
                     sleep(1)
+                    puts " "
+                    puts "Fifty points to #{self.house.name}!"
+                    self.school.award_points(self, self.house, 50)
+                    $stdout.flush
+                    sleep(1)
+                    puts " "
+                    puts "#{self.house.name} now has #{self.house.points} points!"
+                    $stdout.flush
+                    sleep(2)
+                    puts " "
                 else
                     $stdout.flush
                     sleep(2)

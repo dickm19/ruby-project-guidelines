@@ -104,6 +104,7 @@ class CLI
     end
 
     def choices(student)
+        system "clear"
         prompt = TTY::Prompt.new
         choices = ["Go to a class", "Practice a Spell or Potion", "View Courses", "View mastered Spells/Potions", "View Professors", "Play a game of Wizard's Chess", "Check House Points", "End"]
 
@@ -161,6 +162,16 @@ class CLI
                     $stdout.flush
                     sleep(1)
                     puts "You feel a sense of calm warmth as a silver #{student.patronus} seeps out of your wand."
+                    puts " "
+                    puts "Fifty points to #{self.house.name}!"
+                    self.school.award_points(self, self.house, 50)
+                    $stdout.flush
+                    sleep(1)
+                    puts " "
+                    puts "#{self.house.name} now has #{self.house.points} points!"
+                    $stdout.flush
+                    sleep(2)
+                    puts " "
                 else
                     $stdout.flush
                     sleep(1)

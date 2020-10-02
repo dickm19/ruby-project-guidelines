@@ -2,7 +2,7 @@ require_relative 'config/environment'
 require 'sinatra/activerecord/rake'
 require 'pry'
 require "tty-prompt"
-
+system "clear"
 prompt = TTY::Prompt.new
 
 
@@ -57,6 +57,7 @@ cli = CLI.new
 cli.welcome
 puts "Please enter your name"
 student = cli.get_student_name(hogwarts)
+system "clear"
 $stdout.flush
 sleep(1)
 puts " "
@@ -66,12 +67,13 @@ sleep(1)
 puts " "
 courses = hogwarts.courses.map {|course| course.name}
 
-
+system "clear"
 cli.select_courses(student,courses)
 
 puts " "
 puts "Now that you've been sorted into your house and have chosen your courses, you are ready to begin studying at Hogwarts!"
 puts " "
+system "clear"
 prompt.ask('Press "Enter" to continue', echo: false)
 cli.choices(student)
 
