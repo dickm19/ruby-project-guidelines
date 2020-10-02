@@ -1,4 +1,4 @@
-require_relative '../config/environment'
+require_relative 'config/environment'
 require 'sinatra/activerecord/rake'
 require 'pry'
 require "tty-prompt"
@@ -30,7 +30,7 @@ lupin = Professor.create(name: "Professor Lupin", school: hogwarts)
 
 
 #courses
-dada = Course.create(name: "Defense Aganst the Dark Arts", school: hogwarts, professor: lupin)
+dada = Course.create(name: "Defense Against the Dark Arts", school: hogwarts, professor: lupin)
 transfiguration = Course.create(name: "Transfiguration", school: hogwarts, professor: minerva)
 potions = Course.create(name: "Potions", school: hogwarts, professor: snape)
 charms = Course.create(name: "Charms", school: hogwarts, professor: flitwick)
@@ -50,7 +50,6 @@ colovaria = Spell.create(name: "Color Change Charm (Colovaria)", description: "T
 
 
 
-
 #CLI
 puts " "
 cli = CLI.new
@@ -66,19 +65,14 @@ $stdout.flush
 sleep(1)
 puts " "
 courses = hogwarts.courses.map {|course| course.name}
-# binding.pry
+
 
 cli.select_courses(student,courses)
-#binding.pry
 
-# cli.view_courses(student)
-
-# cli.view_professors(student)
-
-#binding.pry
 puts " "
 puts "Now that you've been sorted into your house and have chosen your courses, you are ready to begin studying at Hogwarts!"
 puts " "
+prompt.ask('Press "Enter" to continue', echo: false)
 cli.choices(student)
 
 

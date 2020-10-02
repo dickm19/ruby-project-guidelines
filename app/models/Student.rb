@@ -19,14 +19,22 @@ class Student < ActiveRecord::Base
             if new_spell == spell
                 if spell.status == "mastered"
                     $stdout.flush
-                    sleep(1)
+                    sleep(2)
                     puts " "
                     puts spell.description
+                    $stdout.flush
+                    sleep(3)
                     puts " "
                     puts "You've already mastered #{new_spell.name}."
+                    $stdout.flush
+                    sleep(1)
                 else
+                    $stdout.flush
+                    sleep(2)
                     puts " "
                     puts spell.description
+                    $stdout.flush
+                    sleep(3)
                     puts " "
                     spell.status = "mastered"
                     puts "Congratulations, you have mastered the #{spell.name}!"
@@ -43,8 +51,6 @@ class Student < ActiveRecord::Base
                     $stdout.flush
                     sleep(2)
                     puts " "
-
-
                 end
             end
         end

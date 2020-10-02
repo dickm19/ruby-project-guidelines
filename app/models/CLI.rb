@@ -109,27 +109,44 @@ class CLI
 
         courses = student.courses.map {|course| course.name}
         spells = student.spells.map {|spell| spell.name}
-        course_in =courses.map {|course| Course.find_by_name(course)}
-        spells << Spell.create(name: "Patronus Charm (Expecto Patronum)", description: "Produces a silver, animal guardian, used to protect a witch or wizard against Dementors", course: course_in[0], status: "unmastered").name
+        dada = Course.find_by_name("Defense Against the Dark Arts")
+        spells << Spell.create(name: "Patronus Charm (Expecto Patronum)", description: "Produces a silver, animal guardian, used to protect a witch or wizard against Dementors", course: dada, status: "unmastered").name
         choice = prompt.select("What would you like to do?", choices)
         if choice == "Go to a class"
             course_select = prompt.select("What class would you like to go to?", courses)
             puts " "
-            if course_select == courses[0]
+            course_in = Course.find_by_name(course_select)
+            if course_select == "Defense Against the Dark Arts"
                 puts "You spend the day learning about Boggarts!"
-                student.practice_spell(student.courses[0].spells[0])
+                $stdout.flush
+                sleep(1)
+                student.practice_spell(course_in.spells[0])
+                $stdout.flush
+                sleep(1)
                 puts " "
-            elsif course_select == courses[1]
+            elsif course_select == "Transfiguration"
                 puts "You learned how to magically repair broken objects!"
-                student.practice_spell(student.courses[1].spells[0])
+                $stdout.flush
+                sleep(1)
+                student.practice_spell(course_in.spells[0])
+                $stdout.flush
+                sleep(1)
                 puts " "
-            elsif course_select == courses[2]
+            elsif course_select == "Potions"
                 puts "You learned how to brew liquid luck! Better go buy a lottery ticket!"
-                student.practice_spell(student.courses[2].spells[0])
+                $stdout.flush
+                sleep(1)
+                student.practice_spell(course_in.spells[0])
+                $stdout.flush
+                sleep(1)
                 puts " "
-            elsif course_select == courses[3]
+            elsif course_select == "Charms"
                 puts "You learned how to magically make objects levitate!"
-                student.practice_spell(student.courses[3].spells[0])
+                $stdout.flush
+                sleep(1)
+                student.practice_spell(course_in.spells[0])
+                $stdout.flush
+                sleep(1)
                 puts " "
             end
             prompt.ask('Press "Enter" to continue', echo: false)
@@ -141,8 +158,12 @@ class CLI
             #binding.pry
             if spell_select == "Patronus Charm (Expecto Patronum)"
                 if spell_selection.status == "mastered"
+                    $stdout.flush
+                    sleep(1)
                     puts "You feel a sense of calm warmth as a silver #{student.patronus} seeps out of your wand."
                 else
+                    $stdout.flush
+                    sleep(1)
                     puts "You feel a sense of calm warmth as a silver #{student.patronus} seeps out of your wand."
                     spell_selection.status = "mastered"
                     $stdout.flush
