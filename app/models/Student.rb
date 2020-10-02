@@ -5,6 +5,7 @@ class Student < ActiveRecord::Base
     has_many :spells, through: :courses
     belongs_to :school
     belongs_to :house
+
     # - Student#add_course
     # - adds a course to the list of student courses
     def add_course(course)
@@ -17,10 +18,18 @@ class Student < ActiveRecord::Base
         self.spells.each do |spell|
             if new_spell == spell
                 if spell.status == "mastered"
-                    puts "You've already mastered this spell!"
+                    $stdout.flush
+                    sleep(1)
+                    puts " "
+                    puts spell.description
+                    puts " "
+                    puts "You've already mastered #{new_spell.name}."
                 else
+                    puts " "
+                    puts spell.description
+                    puts " "
                     spell.status = "mastered"
-                    puts "Congratulations, you have mastered #{spell.name}!"
+                    puts "Congratulations, you have mastered the #{spell.name}!"
                     $stdout.flush
                     sleep(1)
                     puts " "
@@ -31,28 +40,38 @@ class Student < ActiveRecord::Base
                     sleep(1)
                     puts " "
                     puts "#{self.house.name} now has #{self.house.points} points!"
+                    $stdout.flush
+                    sleep(2)
+                    puts " "
+
+
                 end
             end
         end
     end
 
     def mastered_spells
+        #binding.pry
         mastered_spells = self.spells.select {|spell| spell.status == "mastered"}
-        spell_names = mastered_spells.map {|spell| puts spell.name}
-        spell_names
+        spell_names = mastered_spells.map {|spell| spell.name}
+        
+        
     end
 
     def view_courses
+        puts " "
+        puts "Courses:".green
         self.courses.map do |course|
-            puts course.name
+            puts "Course: #{course.name}"
         end
     end
     
     def view_professors
-        self.professors.map {|professor| puts "#{professor.name}, #{professor.course.name}" }
+        puts " "
+        puts "Your Professors:".yellow
+        self.professors.map {|professor| puts "#{professor.name}: #{professor.course.name}" }
     end
 
-    
 
 
     

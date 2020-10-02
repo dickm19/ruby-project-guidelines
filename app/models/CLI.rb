@@ -63,7 +63,8 @@ class CLI
 
     def get_student_name(school)
         name = gets.chomp
-        Student.create(name: name, school_id: school.id, house: House.all.sample)
+        patronus_animals = ["rabbit", "unicorn", "spider", "dog", "cat", "stag", "rat", "mouse", "ferret", "moose", "duck", "eagle", "dragon", "snake", "stork", "manatee", "cow", "turtle"]
+        Student.create(name: name, school_id: school.id, house: House.all.sample, patronus: patronus_animals.sample)
     end
     
     def select_courses(student,courses)
@@ -104,11 +105,13 @@ class CLI
 
     def choices(student)
         prompt = TTY::Prompt.new
-        choices = ["Go to a class", "Practice a Spell or Potion", "View Courses", "View mastered Spells/Potions", "View Professors", "Play a game of Wizard's Chess"]
-        choice = prompt.select("What would you like to do?", choices)
+        choices = ["Go to a class", "Practice a Spell or Potion", "View Courses", "View mastered Spells/Potions", "View Professors", "Play a game of Wizard's Chess", "Check House Points", "End"]
+
         courses = student.courses.map {|course| course.name}
         spells = student.spells.map {|spell| spell.name}
-        #binding.pry
+        course_in =courses.map {|course| Course.find_by_name(course)}
+        spells << Spell.create(name: "Patronus Charm (Expecto Patronum)", description: "Produces a silver, animal guardian, used to protect a witch or wizard against Dementors", course: course_in[0], status: "unmastered").name
+        choice = prompt.select("What would you like to do?", choices)
         if choice == "Go to a class"
             course_select = prompt.select("What class would you like to go to?", courses)
             puts " "
@@ -129,31 +132,91 @@ class CLI
                 student.practice_spell(student.courses[3].spells[0])
                 puts " "
             end
+            prompt.ask('Press "Enter" to continue', echo: false)
             choices(student)
         elsif choice == "Practice a Spell or Potion"
             spell_select = prompt.select("What spell/potion would you like to practice?", spells)
-            spell_selection = Spell.find_by_name(spell_select)
-            student.practice_spell(spell_selection)
             puts " "
+            spell_selection = Spell.find_by_name(spell_select)
+            #binding.pry
+            if spell_select == "Patronus Charm (Expecto Patronum)"
+                if spell_selection.status == "mastered"
+                    puts "You feel a sense of calm warmth as a silver #{student.patronus} seeps out of your wand."
+                else
+                    puts "You feel a sense of calm warmth as a silver #{student.patronus} seeps out of your wand."
+                    spell_selection.status = "mastered"
+                    $stdout.flush
+                    sleep(1)
+                    puts " "
+                    puts "Congratulations, you have mastered #{spell_selection.name}!"
+                    $stdout.flush
+                    sleep(1)
+                    puts " "
+
+                    puts "Fifty points to #{student.house.name}!"
+                    student.school.award_points(student, student.house, 50)
+                    $stdout.flush
+                    sleep(1)
+                    puts " "
+                    puts "#{student.house.name} now has #{student.house.points} points!"
+                end
+                prompt.ask('Press "Enter" to continue', echo: false)
+                choices(student)
+            else
+                student.practice_spell(spell_selection)
+            end
+            puts " "
+            prompt.ask('Press "Enter" to continue', echo: false)
             choices(student)
             
         elsif choice == "View Courses"
             student.view_courses
             puts " "
+            prompt.ask('Press "Enter" to continue', echo: false)
             choices(student)
         elsif choice == "View mastered Spells/Potions"
-            student.mastered_spells
+            #binding.pry
             puts " "
+            #binding.pry
+            if student.mastered_spells == []
+                puts 'You have no mastered spells or potions, to master a spell or potion, you must practice it first'
+            else
+                puts "Your Mastered Spells/Potions:".green
+                puts student.mastered_spells
+            end
+            puts " "
+            prompt.ask('Press "Enter" to continue', echo: false)
             choices(student)
         elsif choice == "View Professors"
             student.view_professors
             puts " "
+            prompt.ask('Press "Enter" to continue', echo: false)
             choices(student)    
         elsif choice == "Play a game of Wizard's Chess"
-            win_lose = ["win", "lose"]
+            win_lose = ["win".green, "lose".red]
+            puts " "
             puts "You play a game of Wizard's chess and #{win_lose.sample}!"
+            puts " "
+            prompt.ask('Press "Enter" to continue', echo: false)
             choices(student)
+        elsif choice == "Check House Points"
+            puts " "
+            if student.house.points == nil
+                puts " "
+                puts "#{student.house.name} currently has no points! Master spells and potions to gain points for your house."
+            else
+                puts " "
+                puts "#{student.house.name} currently has #{student.house.points} points!"
+            end
+            puts " "
+            prompt.ask('Press "Enter" to continue', echo: false)
+            choices(student)
+        elsif choice == "End"
+            puts " "
+            puts "Thank you for attending Hogwarts School of Witchcraft and Wizardry.".red
+            puts " "
         end
+        
     end
 
     

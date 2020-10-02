@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2020_09_30_203202) do
     t.string "name"
     t.integer "house_id"
     t.integer "school_id"
+    t.string "patronus"
   end
 
 end

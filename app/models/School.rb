@@ -10,7 +10,7 @@ class School < ActiveRecord::Base
             student.house.points = points
         else
             student.house.points += points
-            house.points += points
+            # house.points += points
         end
     end
 

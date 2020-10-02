@@ -38,21 +38,21 @@ charms = Course.create(name: "Charms", school: hogwarts, professor: flitwick)
 
 
 #Spells
-riddikulus = Spell.create(name: "Boggart-Banishing Spell (Riddikulus)", description: "Forces the Boggart to assume a form that is humerous to the caster, taking away its ability to terrorize.", course: dada, status: "unmastered")
-stupefy = Spell.create(name: "Stunning Spell (Stupefy)", description: "Stuns the target, rendering them unconscious.", course: dada, status: "unmastered")
-reparo = Spell.create(name: "Mending Charm (Reparo)", description: "Seamlessly repairs a broken object.", course: transfiguration, status: "unmastered")
-incendio = Spell.create(name: "Fire-Making Spell (Incendio)", description: "Conjures a jet of flames.", course: transfiguration, status: "unmastered")
-liquid_luck = Spell.create(name: "Liquid Luck Potion (Felix Felicis)", description: "Makes the drinker lucky for a period of time, during which everything they attempt will be successful.", course: potions, status: "unmastered")
-alihotsy_draught = Spell.create(name: "Laughing potion (Alihotsy Draught)", description: "Induces hysteria and uncontrollable laughter on its drinker.", course: potions, status: "unmastered")
-wingardium = Spell.create(name: "Levitation Charm (Wingardium Leviosa)", description: "Causes an object to levitate", course: charms, status: "unmastered")
-accio = Spell.create(name: "Summoning Charm (Accio *object*)", description: "Summons a stated object towards the caster", course: charms, status: "unmastered")
+riddikulus = Spell.create(name: "Boggart-Banishing Spell (Riddikulus)", description: "The boggart wriggles around for a moment and has now morphed from your wost fear into your favorite comedian.", course: dada, status: "unmastered")
+stupefy = Spell.create(name: "Stunning Spell (Stupefy)", description: "Your opponent falls to the ground, unconcious.", course: dada, status: "unmastered")
+reparo = Spell.create(name: "Mending Charm (Reparo)", description: "The broken object that you cast the spell on repairs itself before your eyes.", course: transfiguration, status: "unmastered")
+incendio = Spell.create(name: "Fire-Making Spell (Incendio)", description: "A jet of flames shoots out of the end of your wand. Professor McGonagall does not look happy.", course: transfiguration, status: "unmastered")
+liquid_luck = Spell.create(name: "Liquid Luck Potion (Felix Felicis)", description: "You've successfully brewed Liquid Luck!", course: potions, status: "unmastered")
+alihotsy_draught = Spell.create(name: "Laughing potion (Alihotsy Draught)", description: "You've successfully brewed a Laughing Potion.", course: potions, status: "unmastered")
+wingardium = Spell.create(name: "Levitation Charm (Wingardium Leviosa)", description: "The object that you cast the spell on begins to levitate", course: charms, status: "unmastered")
+colovaria = Spell.create(name: "Color Change Charm (Colovaria)", description: "The object that you cast the spell on changes its color", course: charms, status: "unmastered")
 
 
 
 
 
 #CLI
-
+puts " "
 cli = CLI.new
 
 cli.welcome
@@ -69,15 +69,16 @@ courses = hogwarts.courses.map {|course| course.name}
 # binding.pry
 
 cli.select_courses(student,courses)
-
+#binding.pry
 
 # cli.view_courses(student)
 
 # cli.view_professors(student)
 
 #binding.pry
-
+puts " "
 puts "Now that you've been sorted into your house and have chosen your courses, you are ready to begin studying at Hogwarts!"
+puts " "
 cli.choices(student)
 
 
